@@ -1,31 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useObserver } from "mobx-react-lite";
+
 import './App.scss';
-import { MoviesList } from './components/MoviesList';
-import { FindMovie } from './components/FindMovie';
-import data from './api/movies.json';
+
+import { pokemonsContext, PokemonsProvider } from './mobX/pokemonsContext';
+import { PokemonsList } from './components/PokemonsList';
+import { FindPokemons } from './components/FindPokemons';
+// import { Pagination } from './components/Pagination';
 
 export const App = () => {
-  const [movies, updateMovies] = useState([...data]);
 
-  const addMovie = (preview) => {
-    const isAdded = movies.some(movie => movie.imdbId === preview.imdbId);
-
-    if (!isAdded) {
-      updateMovies([...movies, preview]);
-    }
-  };
 
   return (
-    <div className="page">
-      <div className="page-content">
-        <MoviesList movies={movies} />
-      </div>
-      <div className="sidebar">
-        <FindMovie
-          movies={movies}
-          addMovie={addMovie}
-        />
-      </div>
+    <div className="pokemons">
+      <PokemonsProvider>
+        <FindPokemons />
+        <PokemonsList />
+      </PokemonsProvider>
+      {/* <Pagination /> */}
     </div>
   );
 };
