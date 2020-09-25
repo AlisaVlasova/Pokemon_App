@@ -6,12 +6,17 @@ import './PokemonCard.scss';
 
 import { pokemonsContext } from '../../mobX/pokemonsContext';
 
-export const PokemonCard = ({ name, id, sprite }) => {
+export const PokemonCard = ({
+  sprite,
+  name,
+  id,
+  types,
+}) => {
 
   return useObserver(() => (
     <div className="card">
-      <div className="card__image">
-        <figure className="image">
+      <div className="card__image-container">
+        <figure className="card__image">
           <img
             src={sprite}
             alt="Pokemon"
@@ -19,11 +24,7 @@ export const PokemonCard = ({ name, id, sprite }) => {
         </figure>
       </div>
       <div className="card__content">
-        <div className="media">
-          <div className="media-content">
-            <p className="title">{name}</p>
-          </div>
-        </div>
+        <h2 className="card__title">{name}</h2>
       </div>
     </div>
   ));

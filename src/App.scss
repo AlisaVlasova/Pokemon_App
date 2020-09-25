@@ -1,15 +1,43 @@
-.page {
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #e3e3e3;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+ul,
+li,
+p,
+h1,
+h2,
+h3 {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+input,
+button {
+  border: none;
+  outline: none;
+  background-color: none;
+  color: inherit;
+}
+
+.pokemons {
   display: grid;
-  grid-template: auto / 1fr 400px;
+  grid-template: auto / 350px 1fr;
   column-gap: 20px;
   min-height: 100vh;
 }
 
-.page-content {
-  padding: 20px;
-}
-
-.sidebar {
-  padding: 20px;
-  border-left: 1px solid lightgray;
-}

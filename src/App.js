@@ -5,18 +5,18 @@ import './App.scss';
 
 import { pokemonsContext, PokemonsProvider } from './mobX/pokemonsContext';
 import { PokemonsList } from './components/PokemonsList';
-// import { FindPokemons } from './components/FindPokemons';
+import { FindPokemons } from './components/FindPokemons';
 // import { Pagination } from './components/Pagination';
 
 export const App = () => {
 
 
   return (
-    <div className="App">
+    <div className="pokemons">
       <PokemonsProvider>
+        <FindPokemons />
         <PokemonsList />
       </PokemonsProvider>
-      {/* <FindPokemons /> */}
       {/* <Pagination /> */}
     </div>
   );
