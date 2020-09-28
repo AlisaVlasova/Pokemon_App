@@ -1,16 +1,136 @@
 .finder {
   padding: 20px;
-  display: grid;
-  grid-template-rows: 100px 1fr;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
   gap: 20px;
-  border-right: 1px solid grey;
+
+  background-color: #20639b;
+  box-shadow: 2px 2px 11px 0px #173f5f;
+
+  &__search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    box-shadow: 2px 2px 11px 0px #173f5f;
+
+    margin-bottom: 20px;
+    padding: 10px;
+
+  }
 
   &__field {
+    width: 70%;
+    height: 30px;
+
+    background-color: #20639b;
+    color: #e2ebf3;
+
+    font-size: 1.2rem;
+
+    border-bottom: 1px solid #e2ebf3;
+
+    &::placeholder {
+      color: #e2ebf3;
+      font-size: 1.2rem;
+    }
+  }
+
+    &__error-field {
+      width: 70%;
+      height: 30px;
+
+      background-color: #20639b;
+      color: #ed553b;
+
+      font-size: 1.2rem;
+
+      border-bottom: 1px solid #ed553b;
+
+    &::placeholder {
+      color: #ed553b;
+      font-size: 1.2rem;
+    }
+  }
+
+  &__button {
+    width: 100px;
+    height: 30px;
+
+    border-radius: 5px;
+    border: 1px solid transparent;
+
+    background-color: #e2ebf3;
+    color: #173f5f;
+    box-shadow: 2px 2px 11px 0px #173f5f;
+
+    cursor: pointer;
+    
+    text-transform: uppercase;
+    font-weight: bold;
+
+    &:hover {
+      background-color: #173f5f;
+      color: #e2ebf3;
+      box-shadow: 2px 2px 11px 0px rgba(154,225,227,0.62);
+    }
+  }
+
+  &__types {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 10px;
+  }
+
+  &__type {
+    display: block;
+    width: 90px;
+    height: 20px;
+
+    line-height: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.8rem;
+
+    border-radius: 5px;
+    border: 2px solid transparent;
+    box-shadow: 2px 2px 11px 0px #173f5f;
+
+    cursor: pointer;
+
+    background-color: #e2ebf3;
+    color: #173f5f;
+
+    &:hover {
+      background-color: #173f5f;
+      color: #e2ebf3;
+      box-shadow: 2px 2px 11px 0px #173f5f;
+    }
+  }
+
+  &__toggler {
+
+    &:checked ~ .finder__type{
+      border: 2px solid #f6d55c;
+    }
+  }
+
+  &__error {
     width: 100%;
-    height: 50px;
 
-    background-color: #e3e3e3;
+    border-radius: 5px;
+    box-shadow: 2px 2px 11px 0px #173f5f;
 
-    border-bottom: 1px solid grey;
+    background-color: #f6d55c;
+    color: #ed553b;
+    
+    padding: 20px;
+
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    font-weight: bold;
   }
 }

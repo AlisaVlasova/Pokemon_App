@@ -1,23 +1,19 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useObserver } from "mobx-react-lite";
+import React from 'react';
+import { useObserver } from 'mobx-react-lite';
 
 import './App.scss';
 
-import { pokemonsContext, PokemonsProvider } from './mobX/pokemonsContext';
+import { PokemonsProvider } from './mobX/pokemonsContext';
 import { PokemonsList } from './components/PokemonsList';
 import { FindPokemons } from './components/FindPokemons';
-// import { Pagination } from './components/Pagination';
 
-export const App = () => {
-
-
-  return (
+export const App = () => (
+  useObserver(() => (
     <div className="pokemons">
       <PokemonsProvider>
         <FindPokemons />
         <PokemonsList />
       </PokemonsProvider>
-      {/* <Pagination /> */}
     </div>
-  );
-};
+  ))
+);

@@ -1,8 +1,19 @@
+.pokemons-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  position: relative;
+
+  padding: 20px;
+
+  @media (min-width: 700px) {
+    padding: 20px 20px 0 0;
+  }
+}
+
 .pokemons-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
-
-  &__item {
-  }
 }
