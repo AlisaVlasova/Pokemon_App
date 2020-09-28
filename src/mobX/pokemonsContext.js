@@ -109,10 +109,7 @@ export const PokemonsProvider = ({ children }) => {
       store.isLoadingDetails = true;
       try {
         const {
-          abilities,
           sprites,
-          forms,
-          species,
           name,
           id,
           base_experience,
@@ -120,17 +117,8 @@ export const PokemonsProvider = ({ children }) => {
           weight,
           height,
           stats,
-          moves,
-          location_area_encounters,
-          game_indices,
         } = await getPokemons(query);
-        const abilitiesNames = abilities.map(ab => ab.ability.name);
         const typesNames = types.map(t => t.type.name);
-        const movesNames = moves.map(m => m.move.name);
-        const gameIndices = game_indices.map(g => ({
-          gameIndex: g.game_index,
-          version: g.version.name,
-        }));
         const statsList = stats.map(s => ({
           stat: s.stat.name,
           base_stat: s.base_stat,
@@ -139,7 +127,6 @@ export const PokemonsProvider = ({ children }) => {
 
         store.pokemon = {
           ...store.pokemon,
-          abilities: abilitiesNames,
           sprite: sprites.front_default,
           name,
           id,
@@ -148,9 +135,6 @@ export const PokemonsProvider = ({ children }) => {
           weight,
           height,
           stats: statsList,
-          moves: movesNames,
-          location: location_area_encounters,
-          gameIndices,
         };
       } catch {
         store.error = true;
