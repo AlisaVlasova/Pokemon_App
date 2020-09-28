@@ -1,35 +1,32 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import { useObserver } from 'mobx-react-lite';
 import PropTypes from 'prop-types';
 
 import './PokemonCard.scss';
 
-import { pokemonsContext } from '../../mobX/pokemonsContext';
-
 export const PokemonCard = ({
   sprite,
   name,
-  id,
-  types,
-}) => {
-
-  return useObserver(() => (
+}) => (
+  useObserver(() => (
     <div className="card">
       <div className="card__image-container">
-        <figure className="card__image">
-          <img
-            src={sprite}
-            alt="Pokemon"
-          />
-        </figure>
+        <img
+          className="card__image"
+          src={sprite}
+          alt="Pokemon"
+        />
       </div>
-      <div className="card__content">
-        <h2 className="card__title">{name}</h2>
-      </div>
+      <h2 className="card__title">
+        {name}
+      </h2>
     </div>
-  ));
-};
+  ))
+);
 
 PokemonCard.propTypes = {
-
+  pokemon: PropTypes.shape({
+    sprite: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
 };

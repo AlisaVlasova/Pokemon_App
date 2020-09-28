@@ -1,24 +1,131 @@
 .details {
-  display: grid;
-  grid-template-rows: 310px 1fr;
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
 
   width: 100%;
 
+  border-radius: 5px;
+  box-shadow: 2px 2px 11px 0px #173f5f;
+
+  background-color: #3caea3;
+  color: #173f5f;
+  
+  padding: 20px;
+
+  &__closer-label {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    text-transform: uppercase;
+    font-size: 0.9rem;
+
+    @media (min-width: 700px) {
+      display: none;
+    }
+  }
+
+  &__content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    margin-bottom: 30px;
+  }
+
   &__image {
     object-fit: contain;
-    width: 100%;
+    width: 50%;
+
+    box-shadow: inset 2px 2px 5px #173f5f, 1px 1px 5px #e2ebf3;
+    border-radius: 50%;
+
+    margin-right: 30px;
+
+    transition: all 0.3s;
+
+    &:hover {
+      border-radius: 10px;
+    }
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    margin: 0 auto;
   }
 
   &__title {
-    text-align: center;
+    margin-bottom: 20px;
+
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.2rem;
   }
 
+  &__type {
+    margin-bottom: 10px;
 
+    background-color: #e2ebf3;
+    border-radius: 5px;
+    box-shadow: 2px 2px 11px 0px #173f5f;
+
+
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  &__description {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__base-info {
+    margin-bottom: 10px;
+
+    text-transform: uppercase;
+    font-weight: bold;
+
+    color: #f6d55c;
+  }
+
+  &__stats-table {
+    text-transform: uppercase;
+    background-color: #f6d55c;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: inset 2px 2px 5px #173f5f, 1px 1px 5px #e2ebf3;
+
+  }
+
+  &__stats-head {
+    padding: 10px 0 10px;
+  }
+
+  &__stats-header {
+    text-align: left;
+    border-bottom: 1px solid #173f5f;
+    padding: 10px 0 10px;
+  }
+
+  &__stat-name {
+    font-weight: bold;
+    border-bottom: 1px solid #173f5f;
+  }
+
+  &__stat {
+    text-align: center;
+    color: #ed553b;
+  }
 }
 
-.content {
-  display: grid;
-  grid-template-rows: auto;
-  gap: 10px;
+@for $i from 1 through 6 {
+  .details__stats :nth-child(n + #{$i}) {
+    padding: 10px 0 10px;
+  }
 }

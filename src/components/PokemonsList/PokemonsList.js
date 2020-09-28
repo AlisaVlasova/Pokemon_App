@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { useObserver } from 'mobx-react-lite';
 
 import './PokemonsList.scss';
-import { pokemonsContext } from '../../mobX/pokemonsContext';
 
+import { pokemonsContext } from '../../mobX/pokemonsContext';
 import { PokemonCard } from '../PokemonCard';
+import { Pagination } from '../Pagination';
 
 export const PokemonsList = () => {
   const pokemonsStore = useContext(pokemonsContext);
@@ -19,27 +19,27 @@ export const PokemonsList = () => {
   };
 
   return useObserver(() => (
-    <ul className="pokemons-list">
-      {pokemonsStore.isLoading ? null
-        : pokemonsStore.pokemons.map(pokemon => (
-          <div
-            role="presentation"
-            onClick={() => handleClick(pokemon.name)}
-          >
-            <li className="pokemons-list__item" key={pokemon.name}>
-              <PokemonCard {...pokemon} />
-            </li>
-          </div>
-          
-        ))}
-    </ul>
+    <div className="pokemons-container">
+      <ul className="pokemons-list">
+        {pokemonsStore.isLoading
+          ? (
+            <p className="list-loader">
+              Loading...
+            </p>
+          ) : pokemonsStore.clonedPokemons
+            .slice(pokemonsStore.offset, pokemonsStore.limit)
+            .map(pokemon => (
+              <div
+                role="presentation"
+                onClick={() => handleClick(pokemon.name)}
+              >
+                <li className="pokemons-list__item" key={pokemon.name}>
+                  <PokemonCard {...pokemon} />
+                </li>
+              </div>
+            ))}
+      </ul>
+      <Pagination />
+    </div>
   ));
-};
-
-PokemonsList.propTypes = {
-
-};
-
-PokemonsList.defaultProps = {
-
 };
