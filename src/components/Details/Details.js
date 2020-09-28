@@ -10,7 +10,6 @@ export const Details = (
   {
     sprite,
     name,
-    id,
     baseExperience,
     types,
     weight,
@@ -121,14 +120,21 @@ export const Details = (
 };
 
 Details.propTypes = {
-  pokemon: PropTypes.shape({
-    sprite: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-    baseExperience: PropTypes.string.isRequired,
-    types: PropTypes.arrayOf(PropTypes.object).isRequired,
-    weight: PropTypes.string.isRequired,
-    height: PropTypes.string.isRequired,
-    stats: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
+  sprite: PropTypes.string,
+  name: PropTypes.string,
+  baseExperience: PropTypes.string,
+  types: PropTypes.arrayOf(PropTypes.object),
+  weight: PropTypes.string,
+  height: PropTypes.string,
+  stats: PropTypes.arrayOf(PropTypes.object),
+};
+
+Details.defaultProps = {
+  sprite: '',
+  name: '',
+  baseExperience: '',
+  types: [],
+  weight: '',
+  height: '',
+  stats: [],
 };

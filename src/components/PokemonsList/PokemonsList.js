@@ -30,10 +30,11 @@ export const PokemonsList = () => {
             .slice(pokemonsStore.offset, pokemonsStore.limit)
             .map(pokemon => (
               <div
+                key={pokemon.name}
                 role="presentation"
                 onClick={() => handleClick(pokemon.name)}
               >
-                <li className="pokemons-list__item" key={pokemon.name}>
+                <li className="pokemons-list__item">
                   <PokemonCard {...pokemon} />
                 </li>
               </div>
