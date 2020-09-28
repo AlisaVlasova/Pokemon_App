@@ -25,8 +25,7 @@ export const PokemonCard = ({
 );
 
 PokemonCard.propTypes = {
-  pokemon: PropTypes.shape({
-    sprite: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-  }).isRequired,
+
+  sprite: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
 };

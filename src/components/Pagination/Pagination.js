@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { useObserver } from 'mobx-react-lite';
 
 import './Pagination.scss';
 
@@ -7,7 +6,9 @@ import { pokemonsContext } from '../../mobX/pokemonsContext';
 
 export const Pagination = () => {
   const pokemonsStore = useContext(pokemonsContext);
-  const totalPages = Math.ceil(pokemonsStore.pokemons.length / pokemonsStore.pageSize);
+  const totalPages = Math.ceil(
+    pokemonsStore.pokemons.length / pokemonsStore.pageSize,
+  );
 
   const handlePage = (offset, limit, page) => {
     pokemonsStore.setPagination(offset, limit, page);
@@ -36,8 +37,7 @@ export const Pagination = () => {
         <button
           className="pagination__button"
           type="button"
-          disabled={pokemonsStore.currentPage === totalPages
-            || pokemonsStore.pokemons.length <= pokemonsStore.pageSize}
+          disabled={pokemonsStore.currentPage === totalPages}
           onClick={() => {
             handlePage(
               (pokemonsStore.offset + pokemonsStore.pageSize),
@@ -55,7 +55,7 @@ export const Pagination = () => {
         </p>
         <select
           className="pagination__page-select"
-          onChange={event => pokemonsStore.setPageSize(event.target.value)}
+          onChange={event => pokemonsStore.setPageSize(+event.target.value)}
         >
           <option
             className="pagination__page-size"

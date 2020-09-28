@@ -2,7 +2,6 @@ import React, { createContext } from 'react';
 
 import { useLocalStore } from 'mobx-react-lite';
 import { getPokemons, getPokemonBytype } from '../api/api';
-import notFound from '../images/192-1924986_emily-hojnowski-5-likes-pokeball-svg-clipart.png';
 
 export const PokemonsProvider = ({ children }) => {
   const store = useLocalStore(() => ({
@@ -30,6 +29,7 @@ export const PokemonsProvider = ({ children }) => {
       store.pageSize = num;
       store.limit = num;
       store.offset = 0;
+      store.currentPage = 1;
     },
 
     async getPokemons() {
@@ -40,8 +40,7 @@ export const PokemonsProvider = ({ children }) => {
         store.pokemons = pokemonsList.map((pokemon) => {
           const id = pokemon.url.match(/pokemon\/(\d+)\//)[1];
           const { name } = pokemon;
-          const sprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
-          || notFound;
+          const sprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 
           return {
             ...pokemon,
@@ -59,6 +58,9 @@ export const PokemonsProvider = ({ children }) => {
 
       store.isLoading = false;
     },
+
+    // given api doesn't support the search param.
+    // That's why I have to save all the list to the store and search here.
 
     filterPokemons(query) {
       if (!store.pokemons.some(pokemon => pokemon.name.includes(query))) {
@@ -91,8 +93,7 @@ export const PokemonsProvider = ({ children }) => {
       store.pokemons = pokemonsByType.map((pokemon) => {
         const id = pokemon.pokemon.url.match(/pokemon\/(\d+)\//)[1];
         const { name } = pokemon.pokemon;
-        const sprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
-        || notFound;
+        const sprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 
         return {
           ...pokemon,
@@ -108,10 +109,7 @@ export const PokemonsProvider = ({ children }) => {
       store.isLoadingDetails = true;
       try {
         const {
-          abilities,
           sprites,
-          forms,
-          species,
           name,
           id,
           base_experience,
@@ -119,17 +117,8 @@ export const PokemonsProvider = ({ children }) => {
           weight,
           height,
           stats,
-          moves,
-          location_area_encounters,
-          game_indices,
         } = await getPokemons(query);
-        const abilitiesNames = abilities.map(ab => ab.ability.name);
         const typesNames = types.map(t => t.type.name);
-        const movesNames = moves.map(m => m.move.name);
-        const gameIndices = game_indices.map(g => ({
-          gameIndex: g.game_index,
-          version: g.version.name,
-        }));
         const statsList = stats.map(s => ({
           stat: s.stat.name,
           base_stat: s.base_stat,
@@ -138,7 +127,6 @@ export const PokemonsProvider = ({ children }) => {
 
         store.pokemon = {
           ...store.pokemon,
-          abilities: abilitiesNames,
           sprite: sprites.front_default,
           name,
           id,
@@ -147,9 +135,6 @@ export const PokemonsProvider = ({ children }) => {
           weight,
           height,
           stats: statsList,
-          moves: movesNames,
-          location: location_area_encounters,
-          gameIndices,
         };
       } catch {
         store.error = true;
